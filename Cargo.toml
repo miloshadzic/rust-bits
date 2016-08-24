@@ -1,0 +1,8 @@
+[package]
+name = "mh-bits"
+version = "0.1.0"
+authors = ["Miloš Hadžić <milos@rightfold.io>"]
+readme = "README"
+
+[dependencies]
+rand = "0.3"
