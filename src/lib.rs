@@ -58,6 +58,43 @@ pub fn insertion_sort<T: Ord + Copy>(arr: &mut [T]) {
     }
 }
 
+pub fn quicksort<T: Ord + Copy>(arr: &mut [T]) {
+    let lo = 0;
+    let hi = arr.len();
+    {
+        quicksort_sub(arr, lo, hi);
+    }
+}
+
+fn quicksort_sub<T: Ord + Copy>(arr: &mut [T], lo: usize, hi: usize) {
+    if lo >= hi {
+        return;
+    }
+
+    let mut pivot = lo;
+    let mut i = lo + 1;
+
+    for j in (lo + 1)..hi {
+        if arr[j] < arr[pivot] {
+            swap(arr, i, j);
+            i += 1;
+        }
+    }
+
+    p = i - 1;
+    swap(arr, lo, pivot);
+    {
+        quicksort_sub(arr, lo, pivot);
+        quicksort_sub(arr, pivot + 1, hi);
+    }
+}
+
+fn swap<T: Copy>(arr: &mut [T], i: usize, j: usize) {
+    let t = arr[j];
+    arr[j] = arr[i];
+    arr[i] = t;
+}
+
 #[cfg(test)]
 mod tests {
     extern crate rand;
@@ -103,6 +140,16 @@ mod tests {
         let mut sorted = vec.clone();
         sorted.sort();
         insertion_sort(vec.as_mut_slice());
+        assert_eq!(sorted, vec);
+    }
+
+    #[test]
+    fn test_quicksort() {
+        let mut rng = rand::thread_rng();
+        let mut vec: Vec<i32> = (0..50).map(|_| rng.gen::<i32>() % 100).collect();
+        let mut sorted = vec.clone();
+        sorted.sort();
+        quicksort(vec.as_mut_slice());
         assert_eq!(sorted, vec);
     }
 
