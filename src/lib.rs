@@ -81,7 +81,7 @@ fn quicksort_sub<T: Ord + Copy>(arr: &mut [T], lo: usize, hi: usize) {
         }
     }
 
-    p = i - 1;
+    pivot = i - 1;
     swap(arr, lo, pivot);
     {
         quicksort_sub(arr, lo, pivot);
