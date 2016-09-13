@@ -1,4 +1,7 @@
+use std::mem;
+
 pub fn merge_sort<T: Ord + Copy>(arr: &mut [T]) {
+    // TODO: Insertion sort for small arrays
     match arr.len() {
         0 => return,
         1 => return,
@@ -42,7 +45,7 @@ fn merge<T: Ord + Copy>(arr: &mut [T], splitpoint: usize) {
     }
 
     for (el, bufel) in arr.iter_mut().zip(buf.iter()) {
-        *el = *bufel;
+        mem::replace(el, *bufel);
     }
 }
 
