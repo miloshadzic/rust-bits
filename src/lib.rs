@@ -41,7 +41,6 @@ fn merge<T: Ord + Copy>(arr: &mut [T], splitpoint: usize) {
             buf.push(arr[j]);
             j += 1;
         }
-
     }
 
     for (el, bufel) in arr.iter_mut().zip(buf.iter()) {
@@ -102,8 +101,8 @@ fn swap<T: Copy>(arr: &mut [T], i: usize, j: usize) {
 #[cfg(test)]
 mod tests {
     extern crate rand;
-    use super::*;
     use self::rand::Rng;
+    use super::*;
     use std::cmp::Ordering;
 
     // For testing stability
